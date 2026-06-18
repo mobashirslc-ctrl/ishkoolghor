@@ -69,7 +69,7 @@ export default function App() {
             </div>
             <div>
               <div className="text-white font-black text-lg leading-none tracking-tight">IshkoolGhor | Learn & Earn</div>
-              <div className="text-[#86efac] text-xs leading-none font-medium">ও কাজ করি</div>
+             
             </div>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm text-[#bbf7d0] font-medium">
