@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { COURSES, CourseCard } from "./LearningModule";
+import { COURSES, CourseCard } from "./components/LearningModule";
 import {
   BookOpen,
   Briefcase,
