@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { COURSES, CourseCard } from "./components/LearningModule";
-import RegistrationPage from "./components/RegistrationPage";
+import RegistrationStepper from './components/auth/RegistrationStepper';
 import {
   BookOpen,
   Briefcase,
@@ -84,21 +83,12 @@ export default function App() {
   };
 
   if (view === "onboarding") {
-    return (
-      <OnboardingFlow
-        step={onboardStep}
-        setStep={setOnboardStep}
-        phone={phone}
-        setPhone={setPhone}
-        otp={otp}
-        setOtp={setOtp}
-        userChoice={userChoice}
-        setUserChoice={setUserChoice}
-        onComplete={() => setView("dashboard")}
-        onBack={() => setView("landing")}
-      />
-    );
-  }
+  return (
+    <RegistrationStepper 
+      onComplete={() => setView("dashboard")} 
+    />
+  );
+}
 
   if (view === "dashboard") {
     return (
@@ -121,7 +111,7 @@ export default function App() {
     return <TrainerDashboard onBack={() => setView("dashboard")} onHome={() => setView("landing")} />;
   }
 
- // --- LANDING PAGE ---
+  // --- LANDING PAGE ---
   return (
     <div className="min-h-screen bg-[#f0fdf4]">
       <style>{GLOBAL_STYLES}</style>
@@ -144,24 +134,95 @@ export default function App() {
             <button onClick={() => setView("trainer")} className="hover:text-white transition-colors">ট্রেইনার হোন</button>
           </div>
           <div className="flex items-center gap-2">
-            <button onClick={() => setView("dashboard")} className="hidden md:block text-[#bbf7d0] text-sm hover:text-white transition-colors px-3 py-2 rounded-xl hover:bg-white/10">লগইন</button>
-            <button onClick={() => { setView("onboarding"); setOnboardStep("welcome"); }} className="bg-[#fbbf24] text-[#166534] font-black text-sm px-5 py-2.5 rounded-full hover:bg-[#f59e0b] transition-all shadow-md hover:shadow-lg">শুরু করুন →</button>
+            <button
+              onClick={() => setView("dashboard")}
+              className="hidden md:block text-[#bbf7d0] text-sm hover:text-white transition-colors px-3 py-2 rounded-xl hover:bg-white/10"
+            >
+              লগইন
+            </button>
+            <button
+              onClick={() => { setView("onboarding"); setOnboardStep("welcome"); }}
+              className="bg-[#fbbf24] text-[#166534] font-black text-sm px-5 py-2.5 rounded-full hover:bg-[#f59e0b] transition-all shadow-md hover:shadow-lg"
+            >
+              শুরু করুন →
+            </button>
           </div>
         </div>
       </nav>
 
       {/* Hero */}
       <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-[#166534]">
-        <div className="absolute inset-0 bg-center bg-cover" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1707811180403-c22b7ef06476?w=1400&h=900&fit=crop&auto=format')", opacity: 0.18 }} />
+        <div
+          className="absolute inset-0 bg-center bg-cover"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1707811180403-c22b7ef06476?w=1400&h=900&fit=crop&auto=format')", opacity: 0.18 }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#14532d]/80 via-[#166534]/60 to-[#15803d]/50" />
+        <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#166534] to-transparent" />
+
         <div className="relative z-10 max-w-6xl mx-auto px-4 py-24 grid md:grid-cols-2 gap-16 items-center">
           <div>
-            <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6">শিখুন,<br /><span className="text-[#fbbf24]">উপার্জন</span><br />করুন</h1>
-            <button onClick={() => { setView("onboarding"); setOnboardStep("welcome"); }} className="bg-[#fbbf24] text-[#166534] font-black text-xl px-8 py-5 rounded-2xl">এখনই শুরু করুন</button>
+            <div className="inline-flex items-center gap-2 bg-[#fbbf24]/20 border border-[#fbbf24]/40 rounded-full px-4 py-1.5 mb-8">
+              <span className="w-2 h-2 bg-[#fbbf24] rounded-full animate-pulse" />
+              <span className="text-[#fbbf24] text-sm font-semibold">বাংলাদেশের সেরা দক্ষতা প্ল্যাটফর্ম</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-black text-white leading-[1.1] mb-6 tracking-tight">
+              শিখুন,<br />
+              <span className="text-[#fbbf24]">উপার্জন</span><br />
+              করুন
+            </h1>
+            <p className="text-[#bbf7d0] text-xl leading-relaxed mb-10 max-w-md">
+              গ্রামের মানুষের জন্য সহজ দক্ষতা প্রশিক্ষণ ও আয়ের সুযোগ।
+              ভিডিও দেখুন, কাজ শিখুন, ঘরে বসেই আয় করুন।
+            </p>
+            <div className="flex flex-wrap gap-4 mb-10">
+              <button
+                onClick={() => { setView("onboarding"); setOnboardStep("welcome"); }}
+                className="flex items-center gap-2.5 bg-[#fbbf24] text-[#166534] font-black text-xl px-8 py-5 rounded-2xl hover:bg-[#f59e0b] transition-all shadow-2xl hover:-translate-y-1"
+              >
+                <Play className="w-6 h-6 fill-current" />
+                এখনই শুরু করুন
+              </button>
+              <button className="flex items-center gap-2.5 bg-white/10 border border-white/25 text-white font-bold text-xl px-6 py-5 rounded-2xl hover:bg-white/20 transition-all">
+                <Volume2 className="w-6 h-6" />
+                শুনুন
+              </button>
+            </div>
+            <div className="flex flex-wrap items-center gap-5 text-[#86efac]">
+              {["সম্পূর্ণ বিনামূল্যে", "বাংলায় শিখুন", "ঘরে বসেই"].map((t) => (
+                <div key={t} className="flex items-center gap-2 text-sm font-medium">
+                  <CheckCircle className="w-4 h-4 text-[#4ade80]" />
+                  {t}
+                </div>
+              ))}
+            </div>
           </div>
+
+          {/* Hero image stack */}
           <div className="relative hidden md:flex items-center justify-center">
-             <img src="https://images.unsplash.com/photo-1762943107490-3f6fdfb079c0?w=420&h=520&fit=crop" alt="Hero" className="rounded-3xl shadow-2xl border-4 border-[#4ade80]/20" />
+            <div className="relative w-80 h-96">
+              <img
+                src="https://images.unsplash.com/photo-1762943107490-3f6fdfb079c0?w=420&h=520&fit=crop&auto=format"
+                alt="গ্রামীণ মহিলা দক্ষতা প্রশিক্ষণ"
+                className="absolute top-0 right-0 w-72 h-80 object-cover rounded-3xl shadow-2xl border-4 border-[#4ade80]/20"
+              />
+              <img
+                src="https://images.unsplash.com/photo-1572825587497-5ff6a8ff9746?w=280&h=320&fit=crop&auto=format"
+                alt="মোবাইলে শিক্ষা"
+                className="absolute bottom-0 left-0 w-52 h-64 object-cover rounded-3xl shadow-2xl border-4 border-[#fbbf24]/30 float"
+              />
+              <div className="absolute -top-4 left-8 bg-white rounded-2xl px-4 py-3 shadow-2xl">
+                <div className="text-3xl font-black text-[#166534]">৫০,০০০+</div>
+                <div className="text-xs text-gray-500 font-medium">সফল শিক্ষার্থী</div>
+              </div>
+              <div className="absolute bottom-8 right-0 bg-[#fbbf24] rounded-2xl px-4 py-3 shadow-2xl">
+                <div className="text-2xl font-black text-[#166534]">২০০+</div>
+                <div className="text-xs text-[#166534]/70 font-medium">দক্ষতা কোর্স</div>
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* Wave divider */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
           <svg viewBox="0 0 1440 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
             <path d="M0 72L1440 72L1440 24C1200 56 960 4 720 24C480 44 240 4 0 24L0 72Z" fill="#f0fdf4" />
@@ -180,7 +241,10 @@ export default function App() {
               { num: "৯৮%", label: "সন্তুষ্টি", icon: Star, bg: "#fce7f3", color: "#db2777" },
             ].map((stat) => (
               <div key={stat.label} className="bg-white rounded-2xl p-6 text-center shadow-sm border border-[#dcfce7] hover:shadow-md transition-shadow">
-                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: stat.bg }}>
+                <div
+                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
+                  style={{ backgroundColor: stat.bg }}
+                >
                   <stat.icon className="w-7 h-7" style={{ color: stat.color }} />
                 </div>
                 <div className="text-3xl font-black text-[#166534]">{stat.num}</div>
@@ -200,20 +264,49 @@ export default function App() {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              { step: "০১", title: "নিবন্ধন করুন", desc: "ফোন নম্বর দিয়ে সহজেই অ্যাকাউন্ট তৈরি করুন।", icon: Phone, img: "https://images.unsplash.com/photo-1572825587497-5ff6a8ff9746?w=360&h=240&fit=crop&auto=format" },
-              { step: "০২", title: "দক্ষতা শিখুন", desc: "ভিডিও এবং ছবি দেখে সহজ ভাষায় নতুন দক্ষতা অর্জন করুন।", icon: BookOpen, img: "https://images.unsplash.com/photo-1762943107490-3f6fdfb079c0?w=360&h=240&fit=crop&auto=format" },
-              { step: "০৩", title: "আয় করুন", desc: "আপনার দক্ষতা দিয়ে কাজ করুন এবং সরাসরি মোবাইলে টাকা পান।", icon: Coins, img: "https://images.unsplash.com/photo-1609252509229-364936a1d1a2?w=360&h=240&fit=crop&auto=format" },
+              {
+                step: "০১",
+                title: "নিবন্ধন করুন",
+                desc: "ফোন নম্বর দিয়ে সহজেই অ্যাকাউন্ট তৈরি করুন। মাত্র ২ মিনিট লাগবে।",
+                icon: Phone,
+                img: "https://images.unsplash.com/photo-1572825587497-5ff6a8ff9746?w=360&h=240&fit=crop&auto=format",
+              },
+              {
+                step: "০২",
+                title: "দক্ষতা শিখুন",
+                desc: "ভিডিও এবং ছবি দেখে সহজ ভাষায় নতুন দক্ষতা অর্জন করুন।",
+                icon: BookOpen,
+                img: "https://images.unsplash.com/photo-1762943107490-3f6fdfb079c0?w=360&h=240&fit=crop&auto=format",
+              },
+              {
+                step: "০৩",
+                title: "আয় করুন",
+                desc: "আপনার দক্ষতা দিয়ে কাজ করুন এবং সরাসরি মোবাইলে টাকা পান।",
+                icon: Coins,
+                img: "https://images.unsplash.com/photo-1609252509229-364936a1d1a2?w=360&h=240&fit=crop&auto=format",
+              },
             ].map((item, i) => (
               <div key={i} className="group bg-white/10 backdrop-blur rounded-3xl overflow-hidden border border-white/10 hover:border-[#4ade80]/40 transition-all hover:-translate-y-1">
                 <div className="relative h-48 overflow-hidden">
-                  <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#166534] via-[#166534]/30 to-transparent" />
-                  <div className="absolute top-4 left-4 bg-[#fbbf24] text-[#166534] font-black text-2xl px-4 py-1.5 rounded-xl shadow-lg">{item.step}</div>
+                  <div className="absolute top-4 left-4 bg-[#fbbf24] text-[#166534] font-black text-2xl px-4 py-1.5 rounded-xl shadow-lg">
+                    {item.step}
+                  </div>
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-11 h-11 bg-[#4ade80]/20 rounded-xl flex items-center justify-center"><item.icon className="w-6 h-6 text-[#4ade80]" /></div>
+                    <div className="w-11 h-11 bg-[#4ade80]/20 rounded-xl flex items-center justify-center">
+                      <item.icon className="w-6 h-6 text-[#4ade80]" />
+                    </div>
                     <h3 className="text-xl font-black text-white">{item.title}</h3>
+                    <button className="ml-auto p-1.5 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
+                      <Volume2 className="w-4 h-4 text-[#4ade80]" />
+                    </button>
                   </div>
                   <p className="text-[#86efac] leading-relaxed">{item.desc}</p>
                 </div>
@@ -223,19 +316,6 @@ export default function App() {
         </div>
       </section>
 
-      {/* Registration Section */}
-      <section id="registration" className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-black text-[#166534] mb-4">আমাদের সাথে যোগ দিন</h2>
-          </div>
-          <div className="bg-[#f0fdf4] p-8 rounded-3xl border border-[#bbf7d0] shadow-sm">
-            <RegistrationPage />
-          </div>
-        </div>
-      </section>
-    </div>
-  );
       {/* Features */}
       <section id="skills" className="bg-[#f0fdf4] py-24">
         <div className="max-w-6xl mx-auto px-4">
@@ -492,15 +572,9 @@ export default function App() {
               © ২০২৪ শিখি ও কাজ করি। সর্বস্বত্ব সংরক্ষিত।
             </div>
             <div className="flex gap-5 text-[#86efac] text-sm font-medium">
-              {["যোগাযোগ", "গোপনীয়তা", "শর্তাবলি"].map((label) => (
-  <a 
-    key={label} 
-    href="#" 
-    className="hover:text-white transition-all"
-  >
-    {label}
-  </a>
-))}
+              {["যোগাযোগ", "গোপনীয়তা", "শর্তাবলী"].map((l) => (
+                <a key={l} href="#" className="hover:text-white transition-colors">{l}</a>
+              ))}
             </div>
           </div>
         </div>
@@ -739,28 +813,15 @@ function OnboardingFlow({ step, setStep, phone, setPhone, otp, setOtp, userChoic
   );
 }
 
-function Dashboard({ 
-  tab, setTab, completedLessons, setCompletedLessons, 
-  appliedJobs, setAppliedJobs, onConfetti, onTrainer, onHome, confetti,
-  isEligible, setIsEligible // নতুন দুটি প্রপস এখানে যোগ হবে
-}: {
-  tab: DashTab; 
-  setTab: (t: DashTab) => void;
-  completedLessons: number[]; 
-  setCompletedLessons: (fn: (p: number[]) => number[]) => void;
-  appliedJobs: number[]; 
-  setAppliedJobs: (fn: (p: number[]) => number[]) => void;
-  onConfetti: () => void; 
-  onTrainer: () => void; 
-  onHome: () => void; 
-  confetti: boolean;
-  isEligible: boolean; // নতুন টাইপ
-  setIsEligible: (val: boolean) => void; // নতুন টাইপ
+// ─── DASHBOARD ────────────────────────────────────────────────────────────────
+function Dashboard({ tab, setTab, completedLessons, setCompletedLessons, appliedJobs, setAppliedJobs, onConfetti, onTrainer, onHome, confetti }: {
+  tab: DashTab; setTab: (t: DashTab) => void;
+  completedLessons: number[]; setCompletedLessons: (fn: (p: number[]) => number[]) => void;
+  appliedJobs: number[]; setAppliedJobs: (fn: (p: number[]) => number[]) => void;
+  onConfetti: () => void; onTrainer: () => void; onHome: () => void; confetti: boolean;
 }) {
-  // কোর্স আইডিগুলোর উপর ভিত্তি করে প্রোগ্রেস ক্যালকুলেশন
-  const progress = Math.round((completedLessons.length / 6) * 100); // COURSES এ ৬টি কোর্স থাকায় ৬ দিয়ে ভাগ করলাম
-  
-  // ... আপনার বাকি কোড
+  const progress = Math.round((completedLessons.length / 5) * 100);
+
   const lessons = [
     { id: 1, title: "সেলাইয়ের প্রাথমিক ধারণা", duration: "১৫ মিনিট", emoji: "🧵", level: "সহজ" },
     { id: 2, title: "হাতের কাজ: মৌলিক প্যাটার্ন", duration: "২০ মিনিট", emoji: "🎨", level: "সহজ" },
@@ -828,67 +889,54 @@ function Dashboard({
       <div className="max-w-lg mx-auto px-4 pt-6">
         {/* Learn Tab */}
         {tab === "learn" && (
-  <div className="space-y-6">
-    <div className="mb-2">
-      <h3 className="text-[#166534] font-black text-2xl">শিখার বিষয়সমূহ</h3>
-      <p className="text-gray-500 text-sm">নিচের যেকোনো একটি কোর্স শেষ করুন এবং কাজের জন্য নিজেকে যোগ্য করুন।</p>
-    </div>
-
-    {COURSES.map((course) => {
-      // এখানে চেক করছি কোর্সটি অলরেডি সম্পন্ন কি না
-      const isCompleted = completedLessons.includes(course.id);
-      
-      return (
-        <div
-          key={course.id}
-          className={`bg-white rounded-2xl p-5 shadow-sm border transition-all ${
-            isCompleted ? "border-[#4ade80] bg-[#f0fdf4]" : "border-[#dcfce7] hover:shadow-md"
-          }`}
-        >
-          <div className="flex items-start gap-4">
-            <div className="w-16 h-16 rounded-2xl bg-[#f0fdf4] flex items-center justify-center text-4xl border border-[#dcfce7] shrink-0">
-              {course.emoji}
-            </div>
-            <div className="flex-1">
-              <div className="text-xs font-bold text-[#16a34a] uppercase tracking-wider">{course.category}</div>
-              <h4 className="font-black text-[#166534] text-lg leading-tight mt-0.5">{course.title}</h4>
-              
-              <div className="flex items-center gap-4 mt-3">
-                <span className="text-xs text-gray-500 flex items-center gap-1">
-                  <Clock className="w-3.5 h-3.5" /> {course.duration}
-                </span>
-                <span className="text-xs text-gray-500 flex items-center gap-1">
-                  <Award className="w-3.5 h-3.5" /> {course.outcome}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-4 pt-4 border-t border-[#f0fdf4]">
-            {isCompleted ? (
-              <div className="w-full bg-[#dcfce7] text-[#16a34a] font-black text-center py-3 rounded-xl flex items-center justify-center gap-2">
-                <CheckCircle className="w-5 h-5" /> সম্পন্ন হয়েছে (যোগ্য)
-              </div>
-            ) : (
-              <button
-                onClick={() => {
-                  // কোর্স শেষ করার লজিক
-                  setCompletedLessons((prev) => [...prev, course.id]);
-                  // সব কোর্স শেষ হলে বা নির্দিষ্ট কোর্স শেষ হলে এলিজিবল করা
-                  setIsEligible(true); 
-                  onConfetti();
-                }}
-                className="w-full bg-[#166534] text-white font-black py-3 rounded-xl hover:bg-[#14532d] transition-all shadow-md"
-              >
-                কোর্স শুরু করুন →
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
+              <h3 className="text-[#166534] font-black text-2xl">আজকের লেসন</h3>
+              <button className="text-[#16a34a] text-sm flex items-center gap-1 font-medium hover:text-[#166534] transition-colors">
+                সব দেখুন <ChevronRight className="w-4 h-4" />
               </button>
-            )}
+            </div>
+            {lessons.map((lesson) => {
+              const done = completedLessons.includes(lesson.id);
+              return (
+                <div
+                  key={lesson.id}
+                  className={`bg-white rounded-2xl p-4 shadow-sm border flex items-center gap-4 transition-all ${done ? "border-[#4ade80] bg-[#f0fdf4]" : "border-[#dcfce7] hover:border-[#86efac] hover:shadow-md"}`}
+                >
+                  <div className="w-14 h-14 rounded-xl bg-[#f0fdf4] flex items-center justify-center text-3xl shrink-0 border border-[#dcfce7]">
+                    {lesson.emoji}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="font-bold text-[#166534] truncate">{lesson.title}</div>
+                    <div className="flex items-center gap-2 mt-1.5">
+                      <span className="text-xs text-gray-400 flex items-center gap-1">
+                        <Clock className="w-3 h-3" /> {lesson.duration}
+                      </span>
+                      <span className="text-xs bg-[#dcfce7] text-[#16a34a] px-2 py-0.5 rounded-full font-medium">{lesson.level}</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-col items-end gap-2">
+                    <button className="p-1.5 bg-[#f0fdf4] rounded-lg hover:bg-[#dcfce7] transition-colors">
+                      <Volume2 className="w-4 h-4 text-[#16a34a]" />
+                    </button>
+                    <button
+                      onClick={() => {
+                        if (!done) {
+                          setCompletedLessons((prev) => [...prev, lesson.id]);
+                          onConfetti();
+                        }
+                      }}
+                      className={`text-xs font-black px-3 py-1.5 rounded-xl transition-all ${done ? "bg-[#4ade80] text-[#166534] cursor-default" : "bg-[#166534] text-white hover:bg-[#14532d]"}`}
+                    >
+                      {done ? "✓ সম্পন্ন" : "শুরু →"}
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
-        </div>
-      );
-    })}
-  </div>
-)}
+        )}
+
         {/* Earn Tab */}
         {tab === "earn" && (
           <div className="space-y-4">
