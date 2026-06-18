@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RegistrationForms from "../components/RegistrationForms";
+import RegistrationForms from "../components/RegistrationForm";
 import {
   BookOpen,
   Briefcase,
