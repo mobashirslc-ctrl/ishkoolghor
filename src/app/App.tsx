@@ -121,7 +121,7 @@ export default function App() {
     return <TrainerDashboard onBack={() => setView("dashboard")} onHome={() => setView("landing")} />;
   }
 
-  // --- LANDING PAGE ---
+ // --- LANDING PAGE ---
   return (
     <div className="min-h-screen bg-[#f0fdf4]">
       <style>{GLOBAL_STYLES}</style>
@@ -162,22 +162,6 @@ export default function App() {
              <img src="https://images.unsplash.com/photo-1762943107490-3f6fdfb079c0?w=420&h=520&fit=crop" alt="Hero" className="rounded-3xl shadow-2xl border-4 border-[#4ade80]/20" />
           </div>
         </div>
-      </section>
-
-      {/* Registration Section */}
-      <section id="registration" className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-black text-[#166534] mb-4">আমাদের সাথে যোগ দিন</h2>
-          </div>
-          <div className="bg-[#f0fdf4] p-8 rounded-3xl border border-[#bbf7d0] shadow-sm">
-            <RegistrationPage />
-          </div>
-        </div>
-      </section>
-    </div>
-  );
-        {/* Wave divider */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
           <svg viewBox="0 0 1440 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
             <path d="M0 72L1440 72L1440 24C1200 56 960 4 720 24C480 44 240 4 0 24L0 72Z" fill="#f0fdf4" />
@@ -196,10 +180,7 @@ export default function App() {
               { num: "৯৮%", label: "সন্তুষ্টি", icon: Star, bg: "#fce7f3", color: "#db2777" },
             ].map((stat) => (
               <div key={stat.label} className="bg-white rounded-2xl p-6 text-center shadow-sm border border-[#dcfce7] hover:shadow-md transition-shadow">
-                <div
-                  className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4"
-                  style={{ backgroundColor: stat.bg }}
-                >
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center mx-auto mb-4" style={{ backgroundColor: stat.bg }}>
                   <stat.icon className="w-7 h-7" style={{ color: stat.color }} />
                 </div>
                 <div className="text-3xl font-black text-[#166534]">{stat.num}</div>
@@ -219,49 +200,20 @@ export default function App() {
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
-              {
-                step: "০১",
-                title: "নিবন্ধন করুন",
-                desc: "ফোন নম্বর দিয়ে সহজেই অ্যাকাউন্ট তৈরি করুন। মাত্র ২ মিনিট লাগবে।",
-                icon: Phone,
-                img: "https://images.unsplash.com/photo-1572825587497-5ff6a8ff9746?w=360&h=240&fit=crop&auto=format",
-              },
-              {
-                step: "০২",
-                title: "দক্ষতা শিখুন",
-                desc: "ভিডিও এবং ছবি দেখে সহজ ভাষায় নতুন দক্ষতা অর্জন করুন।",
-                icon: BookOpen,
-                img: "https://images.unsplash.com/photo-1762943107490-3f6fdfb079c0?w=360&h=240&fit=crop&auto=format",
-              },
-              {
-                step: "০৩",
-                title: "আয় করুন",
-                desc: "আপনার দক্ষতা দিয়ে কাজ করুন এবং সরাসরি মোবাইলে টাকা পান।",
-                icon: Coins,
-                img: "https://images.unsplash.com/photo-1609252509229-364936a1d1a2?w=360&h=240&fit=crop&auto=format",
-              },
+              { step: "০১", title: "নিবন্ধন করুন", desc: "ফোন নম্বর দিয়ে সহজেই অ্যাকাউন্ট তৈরি করুন।", icon: Phone, img: "https://images.unsplash.com/photo-1572825587497-5ff6a8ff9746?w=360&h=240&fit=crop&auto=format" },
+              { step: "০২", title: "দক্ষতা শিখুন", desc: "ভিডিও এবং ছবি দেখে সহজ ভাষায় নতুন দক্ষতা অর্জন করুন।", icon: BookOpen, img: "https://images.unsplash.com/photo-1762943107490-3f6fdfb079c0?w=360&h=240&fit=crop&auto=format" },
+              { step: "০৩", title: "আয় করুন", desc: "আপনার দক্ষতা দিয়ে কাজ করুন এবং সরাসরি মোবাইলে টাকা পান।", icon: Coins, img: "https://images.unsplash.com/photo-1609252509229-364936a1d1a2?w=360&h=240&fit=crop&auto=format" },
             ].map((item, i) => (
               <div key={i} className="group bg-white/10 backdrop-blur rounded-3xl overflow-hidden border border-white/10 hover:border-[#4ade80]/40 transition-all hover:-translate-y-1">
                 <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={item.img}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
+                  <img src={item.img} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#166534] via-[#166534]/30 to-transparent" />
-                  <div className="absolute top-4 left-4 bg-[#fbbf24] text-[#166534] font-black text-2xl px-4 py-1.5 rounded-xl shadow-lg">
-                    {item.step}
-                  </div>
+                  <div className="absolute top-4 left-4 bg-[#fbbf24] text-[#166534] font-black text-2xl px-4 py-1.5 rounded-xl shadow-lg">{item.step}</div>
                 </div>
                 <div className="p-6">
                   <div className="flex items-center gap-3 mb-3">
-                    <div className="w-11 h-11 bg-[#4ade80]/20 rounded-xl flex items-center justify-center">
-                      <item.icon className="w-6 h-6 text-[#4ade80]" />
-                    </div>
+                    <div className="w-11 h-11 bg-[#4ade80]/20 rounded-xl flex items-center justify-center"><item.icon className="w-6 h-6 text-[#4ade80]" /></div>
                     <h3 className="text-xl font-black text-white">{item.title}</h3>
-                    <button className="ml-auto p-1.5 bg-white/10 rounded-lg hover:bg-white/20 transition-colors">
-                      <Volume2 className="w-4 h-4 text-[#4ade80]" />
-                    </button>
                   </div>
                   <p className="text-[#86efac] leading-relaxed">{item.desc}</p>
                 </div>
@@ -271,6 +223,19 @@ export default function App() {
         </div>
       </section>
 
+      {/* Registration Section */}
+      <section id="registration" className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-black text-[#166534] mb-4">আমাদের সাথে যোগ দিন</h2>
+          </div>
+          <div className="bg-[#f0fdf4] p-8 rounded-3xl border border-[#bbf7d0] shadow-sm">
+            <RegistrationPage />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
       {/* Features */}
       <section id="skills" className="bg-[#f0fdf4] py-24">
         <div className="max-w-6xl mx-auto px-4">
