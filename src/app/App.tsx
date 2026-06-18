@@ -492,9 +492,15 @@ export default function App() {
               © ২০২৪ শিখি ও কাজ করি। সর্বস্বত্ব সংরক্ষিত।
             </div>
             <div className="flex gap-5 text-[#86efac] text-sm font-medium">
-              {["যোগাযোগ", "গোপনীয়তা", "শর্তাবলী"].map((l) => (
-                <a key={l} href="#" className="hover:text-white transition-colors">{l}</a>
-              ))}
+              {["যোগাযোগ", "গোপনীয়তা", "শর্তাবলি"].map((label) => (
+  <a 
+    key={label} 
+    href="#" 
+    className="hover:text-white transition-all"
+  >
+    {label}
+  </a>
+))}
             </div>
           </div>
         </div>
