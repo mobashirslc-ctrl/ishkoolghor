@@ -68,7 +68,7 @@ export default function App() {
               <GraduationCap className="w-6 h-6 text-[#166534]" />
             </div>
             <div>
-              <div className="text-white font-black text-lg leading-none tracking-tight">শিখি</div>
+              <div className="text-white font-black text-lg leading-none tracking-tight">IshkoolGhor | Learn & Earn</div>
               <div className="text-[#86efac] text-xs leading-none font-medium">ও কাজ করি</div>
             </div>
           </div>
