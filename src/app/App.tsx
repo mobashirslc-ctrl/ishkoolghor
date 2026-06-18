@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { COURSES, CourseCard } from "./components/LearningModule";
+import RegistrationPage from "./components/RegistrationPage";
 import {
   BookOpen,
   Briefcase,
@@ -161,10 +162,7 @@ export default function App() {
 
       {/* Hero */}
       <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-[#166534]">
-        <div
-          className="absolute inset-0 bg-center bg-cover"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1707811180403-c22b7ef06476?w=1400&h=900&fit=crop&auto=format')", opacity: 0.18 }}
-        />
+        <div className="absolute inset-0 bg-center bg-cover" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1707811180403-c22b7ef06476?w=1400&h=900&fit=crop&auto=format')", opacity: 0.18 }} />
         <div className="absolute inset-0 bg-gradient-to-br from-[#14532d]/80 via-[#166534]/60 to-[#15803d]/50" />
         <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#166534] to-transparent" />
 
@@ -180,32 +178,43 @@ export default function App() {
               করুন
             </h1>
             <p className="text-[#bbf7d0] text-xl leading-relaxed mb-10 max-w-md">
-              গ্রামের মানুষের জন্য সহজ দক্ষতা প্রশিক্ষণ ও আয়ের সুযোগ।
-              ভিডিও দেখুন, কাজ শিখুন, ঘরে বসেই আয় করুন।
+              গ্রামের মানুষের জন্য সহজ দক্ষতা প্রশিক্ষণ ও আয়ের সুযোগ। ভিডিও দেখুন, কাজ শিখুন, ঘরে বসেই আয় করুন।
             </p>
             <div className="flex flex-wrap gap-4 mb-10">
-              <button
-                onClick={() => { setView("onboarding"); setOnboardStep("welcome"); }}
-                className="flex items-center gap-2.5 bg-[#fbbf24] text-[#166534] font-black text-xl px-8 py-5 rounded-2xl hover:bg-[#f59e0b] transition-all shadow-2xl hover:-translate-y-1"
-              >
-                <Play className="w-6 h-6 fill-current" />
-                এখনই শুরু করুন
+              <button onClick={() => { setView("onboarding"); setOnboardStep("welcome"); }} className="flex items-center gap-2.5 bg-[#fbbf24] text-[#166534] font-black text-xl px-8 py-5 rounded-2xl hover:bg-[#f59e0b] transition-all shadow-2xl hover:-translate-y-1">
+                <Play className="w-6 h-6 fill-current" /> এখনই শুরু করুন
               </button>
-              <button className="flex items-center gap-2.5 bg-white/10 border border-white/25 text-white font-bold text-xl px-6 py-5 rounded-2xl hover:bg-white/20 transition-all">
-                <Volume2 className="w-6 h-6" />
-                শুনুন
-              </button>
-            </div>
-            <div className="flex flex-wrap items-center gap-5 text-[#86efac]">
-              {["সম্পূর্ণ বিনামূল্যে", "বাংলায় শিখুন", "ঘরে বসেই"].map((t) => (
-                <div key={t} className="flex items-center gap-2 text-sm font-medium">
-                  <CheckCircle className="w-4 h-4 text-[#4ade80]" />
-                  {t}
-                </div>
-              ))}
             </div>
           </div>
+          <div className="relative hidden md:flex items-center justify-center">
+            <div className="relative w-80 h-96">
+              <img src="https://images.unsplash.com/photo-1762943107490-3f6fdfb079c0?w=420&h=520&fit=crop&auto=format" alt="শিক্ষা" className="absolute top-0 right-0 w-72 h-80 object-cover rounded-3xl shadow-2xl border-4 border-[#4ade80]/20" />
+            </div>
+          </div>
+        </div>
+      </section>
 
+      {/* Registration Section */}
+      <section id="registration" className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-black text-[#166534] mb-4">আমাদের সাথে যোগ দিন</h2>
+            <p className="text-gray-600">শিক্ষার্থী হিসেবে দক্ষ হোন অথবা উপার্জনকারী হিসেবে কাজ শুরু করুন</p>
+          </div>
+          <div className="bg-[#f0fdf4] p-8 rounded-3xl border border-[#bbf7d0] shadow-sm">
+            <RegistrationPage />
+            <div className="mt-8 pt-6 border-t border-[#bbf7d0] text-center">
+              <p className="text-sm text-gray-500 italic">
+                * মনে রাখবেন: আবেদন জমা দেওয়ার পর আমাদের অ্যাডমিন আপনার তথ্য যাচাই করবেন। 
+                অনুমোদনের পর আপনি আপনার কাঙ্ক্ষিত ড্যাশবোর্ডে প্রবেশের অনুমতি পাবেন।
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
           {/* Hero image stack */}
           <div className="relative hidden md:flex items-center justify-center">
             <div className="relative w-80 h-96">
