@@ -186,9 +186,16 @@ export default function App() {
               </button>
             </div>
           </div>
+
+          {/* Hero image stack */}
           <div className="relative hidden md:flex items-center justify-center">
             <div className="relative w-80 h-96">
               <img src="https://images.unsplash.com/photo-1762943107490-3f6fdfb079c0?w=420&h=520&fit=crop&auto=format" alt="শিক্ষা" className="absolute top-0 right-0 w-72 h-80 object-cover rounded-3xl shadow-2xl border-4 border-[#4ade80]/20" />
+              <img src="https://images.unsplash.com/photo-1572825587497-5ff6a8ff9746?w=280&h=320&fit=crop&auto=format" alt="মোবাইলে শিক্ষা" className="absolute bottom-0 left-0 w-52 h-64 object-cover rounded-3xl shadow-2xl border-4 border-[#fbbf24]/30 float" />
+              <div className="absolute -top-4 left-8 bg-white rounded-2xl px-4 py-3 shadow-2xl">
+                <div className="text-3xl font-black text-[#166534]">৫০,০০০+</div>
+                <div className="text-xs text-gray-500 font-medium">সফল শিক্ষার্থী</div>
+              </div>
             </div>
           </div>
         </div>
@@ -205,8 +212,7 @@ export default function App() {
             <RegistrationPage />
             <div className="mt-8 pt-6 border-t border-[#bbf7d0] text-center">
               <p className="text-sm text-gray-500 italic">
-                * মনে রাখবেন: আবেদন জমা দেওয়ার পর আমাদের অ্যাডমিন আপনার তথ্য যাচাই করবেন। 
-                অনুমোদনের পর আপনি আপনার কাঙ্ক্ষিত ড্যাশবোর্ডে প্রবেশের অনুমতি পাবেন।
+                * মনে রাখবেন: আবেদন জমা দেওয়ার পর আমাদের অ্যাডমিন আপনার তথ্য যাচাই করবেন। 
               </p>
             </div>
           </div>
@@ -215,31 +221,6 @@ export default function App() {
     </div>
   );
 }
-          {/* Hero image stack */}
-          <div className="relative hidden md:flex items-center justify-center">
-            <div className="relative w-80 h-96">
-              <img
-                src="https://images.unsplash.com/photo-1762943107490-3f6fdfb079c0?w=420&h=520&fit=crop&auto=format"
-                alt="গ্রামীণ মহিলা দক্ষতা প্রশিক্ষণ"
-                className="absolute top-0 right-0 w-72 h-80 object-cover rounded-3xl shadow-2xl border-4 border-[#4ade80]/20"
-              />
-              <img
-                src="https://images.unsplash.com/photo-1572825587497-5ff6a8ff9746?w=280&h=320&fit=crop&auto=format"
-                alt="মোবাইলে শিক্ষা"
-                className="absolute bottom-0 left-0 w-52 h-64 object-cover rounded-3xl shadow-2xl border-4 border-[#fbbf24]/30 float"
-              />
-              <div className="absolute -top-4 left-8 bg-white rounded-2xl px-4 py-3 shadow-2xl">
-                <div className="text-3xl font-black text-[#166534]">৫০,০০০+</div>
-                <div className="text-xs text-gray-500 font-medium">সফল শিক্ষার্থী</div>
-              </div>
-              <div className="absolute bottom-8 right-0 bg-[#fbbf24] rounded-2xl px-4 py-3 shadow-2xl">
-                <div className="text-2xl font-black text-[#166534]">২০০+</div>
-                <div className="text-xs text-[#166534]/70 font-medium">দক্ষতা কোর্স</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {/* Wave divider */}
         <div className="absolute bottom-0 left-0 right-0 z-10">
           <svg viewBox="0 0 1440 72" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
