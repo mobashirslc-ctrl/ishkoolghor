@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { COURSES, CourseCard } from "./LearningModule";
 import {
   BookOpen,
   Briefcase,
@@ -821,15 +822,28 @@ function OnboardingFlow({ step, setStep, phone, setPhone, otp, setOtp, userChoic
   );
 }
 
-// ─── DASHBOARD ────────────────────────────────────────────────────────────────
-function Dashboard({ tab, setTab, completedLessons, setCompletedLessons, appliedJobs, setAppliedJobs, onConfetti, onTrainer, onHome, confetti }: {
-  tab: DashTab; setTab: (t: DashTab) => void;
-  completedLessons: number[]; setCompletedLessons: (fn: (p: number[]) => number[]) => void;
-  appliedJobs: number[]; setAppliedJobs: (fn: (p: number[]) => number[]) => void;
-  onConfetti: () => void; onTrainer: () => void; onHome: () => void; confetti: boolean;
+function Dashboard({ 
+  tab, setTab, completedLessons, setCompletedLessons, 
+  appliedJobs, setAppliedJobs, onConfetti, onTrainer, onHome, confetti,
+  isEligible, setIsEligible // নতুন দুটি প্রপস এখানে যোগ হবে
+}: {
+  tab: DashTab; 
+  setTab: (t: DashTab) => void;
+  completedLessons: number[]; 
+  setCompletedLessons: (fn: (p: number[]) => number[]) => void;
+  appliedJobs: number[]; 
+  setAppliedJobs: (fn: (p: number[]) => number[]) => void;
+  onConfetti: () => void; 
+  onTrainer: () => void; 
+  onHome: () => void; 
+  confetti: boolean;
+  isEligible: boolean; // নতুন টাইপ
+  setIsEligible: (val: boolean) => void; // নতুন টাইপ
 }) {
-  const progress = Math.round((completedLessons.length / 5) * 100);
-
+  // কোর্স আইডিগুলোর উপর ভিত্তি করে প্রোগ্রেস ক্যালকুলেশন
+  const progress = Math.round((completedLessons.length / 6) * 100); // COURSES এ ৬টি কোর্স থাকায় ৬ দিয়ে ভাগ করলাম
+  
+  // ... আপনার বাকি কোড
   const lessons = [
     { id: 1, title: "সেলাইয়ের প্রাথমিক ধারণা", duration: "১৫ মিনিট", emoji: "🧵", level: "সহজ" },
     { id: 2, title: "হাতের কাজ: মৌলিক প্যাটার্ন", duration: "২০ মিনিট", emoji: "🎨", level: "সহজ" },
@@ -897,54 +911,67 @@ function Dashboard({ tab, setTab, completedLessons, setCompletedLessons, applied
       <div className="max-w-lg mx-auto px-4 pt-6">
         {/* Learn Tab */}
         {tab === "learn" && (
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h3 className="text-[#166534] font-black text-2xl">আজকের লেসন</h3>
-              <button className="text-[#16a34a] text-sm flex items-center gap-1 font-medium hover:text-[#166534] transition-colors">
-                সব দেখুন <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
-            {lessons.map((lesson) => {
-              const done = completedLessons.includes(lesson.id);
-              return (
-                <div
-                  key={lesson.id}
-                  className={`bg-white rounded-2xl p-4 shadow-sm border flex items-center gap-4 transition-all ${done ? "border-[#4ade80] bg-[#f0fdf4]" : "border-[#dcfce7] hover:border-[#86efac] hover:shadow-md"}`}
-                >
-                  <div className="w-14 h-14 rounded-xl bg-[#f0fdf4] flex items-center justify-center text-3xl shrink-0 border border-[#dcfce7]">
-                    {lesson.emoji}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-bold text-[#166534] truncate">{lesson.title}</div>
-                    <div className="flex items-center gap-2 mt-1.5">
-                      <span className="text-xs text-gray-400 flex items-center gap-1">
-                        <Clock className="w-3 h-3" /> {lesson.duration}
-                      </span>
-                      <span className="text-xs bg-[#dcfce7] text-[#16a34a] px-2 py-0.5 rounded-full font-medium">{lesson.level}</span>
-                    </div>
-                  </div>
-                  <div className="flex flex-col items-end gap-2">
-                    <button className="p-1.5 bg-[#f0fdf4] rounded-lg hover:bg-[#dcfce7] transition-colors">
-                      <Volume2 className="w-4 h-4 text-[#16a34a]" />
-                    </button>
-                    <button
-                      onClick={() => {
-                        if (!done) {
-                          setCompletedLessons((prev) => [...prev, lesson.id]);
-                          onConfetti();
-                        }
-                      }}
-                      className={`text-xs font-black px-3 py-1.5 rounded-xl transition-all ${done ? "bg-[#4ade80] text-[#166534] cursor-default" : "bg-[#166534] text-white hover:bg-[#14532d]"}`}
-                    >
-                      {done ? "✓ সম্পন্ন" : "শুরু →"}
-                    </button>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        )}
+  <div className="space-y-6">
+    <div className="mb-2">
+      <h3 className="text-[#166534] font-black text-2xl">শিখার বিষয়সমূহ</h3>
+      <p className="text-gray-500 text-sm">নিচের যেকোনো একটি কোর্স শেষ করুন এবং কাজের জন্য নিজেকে যোগ্য করুন।</p>
+    </div>
 
+    {COURSES.map((course) => {
+      // এখানে চেক করছি কোর্সটি অলরেডি সম্পন্ন কি না
+      const isCompleted = completedLessons.includes(course.id);
+      
+      return (
+        <div
+          key={course.id}
+          className={`bg-white rounded-2xl p-5 shadow-sm border transition-all ${
+            isCompleted ? "border-[#4ade80] bg-[#f0fdf4]" : "border-[#dcfce7] hover:shadow-md"
+          }`}
+        >
+          <div className="flex items-start gap-4">
+            <div className="w-16 h-16 rounded-2xl bg-[#f0fdf4] flex items-center justify-center text-4xl border border-[#dcfce7] shrink-0">
+              {course.emoji}
+            </div>
+            <div className="flex-1">
+              <div className="text-xs font-bold text-[#16a34a] uppercase tracking-wider">{course.category}</div>
+              <h4 className="font-black text-[#166534] text-lg leading-tight mt-0.5">{course.title}</h4>
+              
+              <div className="flex items-center gap-4 mt-3">
+                <span className="text-xs text-gray-500 flex items-center gap-1">
+                  <Clock className="w-3.5 h-3.5" /> {course.duration}
+                </span>
+                <span className="text-xs text-gray-500 flex items-center gap-1">
+                  <Award className="w-3.5 h-3.5" /> {course.outcome}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 pt-4 border-t border-[#f0fdf4]">
+            {isCompleted ? (
+              <div className="w-full bg-[#dcfce7] text-[#16a34a] font-black text-center py-3 rounded-xl flex items-center justify-center gap-2">
+                <CheckCircle className="w-5 h-5" /> সম্পন্ন হয়েছে (যোগ্য)
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  // কোর্স শেষ করার লজিক
+                  setCompletedLessons((prev) => [...prev, course.id]);
+                  // সব কোর্স শেষ হলে বা নির্দিষ্ট কোর্স শেষ হলে এলিজিবল করা
+                  setIsEligible(true); 
+                  onConfetti();
+                }}
+                className="w-full bg-[#166534] text-white font-black py-3 rounded-xl hover:bg-[#14532d] transition-all shadow-md"
+              >
+                কোর্স শুরু করুন →
+              </button>
+            )}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+)}
         {/* Earn Tab */}
         {tab === "earn" && (
           <div className="space-y-4">
